@@ -1,7 +1,17 @@
 const Gameboard = (function () {
   const board = ["", "", "", "", "", "", "", "", ""];
+
   const getBoard = () => board;
-  return { getBoard };
+
+  const placeMarker = function (index, marker) {
+    if (board[index] === "") {
+      board[index] = marker;
+    }
+
+    return board;
+  };
+
+  return { getBoard, placeMarker };
 })();
 
 function createPlayer(name, marker) {
