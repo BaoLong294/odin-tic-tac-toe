@@ -17,6 +17,10 @@ body {
   margin: 40px auto;
 }
 
+.set-up-form.start-game {
+  opacity: 0.6;
+}
+
 .set-up-form .input-group {
   display: flex;
   flex-direction: column;
@@ -79,10 +83,10 @@ body {
 
 .game-board {
   display: grid;
-  width: 600px;
+  width: 540px;
   margin: 50px auto;
-  grid-template-columns: repeat(3, 200px);
-  grid-auto-rows: 200px;
+  grid-template-columns: repeat(3, 180px);
+  grid-auto-rows: 180px;
   gap: 25px;
 }
 
