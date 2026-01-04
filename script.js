@@ -12,7 +12,11 @@ const Gameboard = (function () {
     return false;
   };
 
-  return { getBoard, placeMarker };
+  const resetBoard = () => {
+    board.fill("");
+  };
+
+  return { getBoard, placeMarker, resetBoard };
 })();
 
 function createPlayer(name, marker) {
@@ -44,6 +48,21 @@ const GameController = (function () {
     player2 = createPlayer(name2, "O");
     activePlayer = player1;
     gameActive = true;
+  };
+
+  const nextRound = function () {
+    Gameboard.resetBoard();
+    activePlayer = player1;
+    gameActive = true;
+
+    return { activePlayer: activePlayer.name };
+  };
+
+  const restart = function () {
+    Gameboard.resetBoard();
+    player1 = {};
+    player2 = {};
+    gameActive = false;
   };
 
   const checkWin = function () {
@@ -86,7 +105,7 @@ const GameController = (function () {
     return Gameboard.getBoard();
   };
 
-  return { startGame, playRound };
+  return { startGame, playRound, nextRound, restart };
 })();
 
 const displayController = (function () {
@@ -94,8 +113,12 @@ const displayController = (function () {
   const player1 = setupForm.querySelector("#p1-name");
   const player2 = setupForm.querySelector("#p2-name");
   const startButton = setupForm.querySelector(".start-game-button");
+
   const turnDisplay = document.querySelector(".status-display");
+
+  const nextRoundButton = document.querySelector(".next-round-button");
   const restartButton = document.querySelector(".restart-button");
+
   const board = document.querySelector(".game-board");
 
   const renderBoard = function () {
@@ -146,6 +169,30 @@ const displayController = (function () {
     turnDisplay.textContent = `TURN: ${p1Name}`;
 
     GameController.startGame(p1Name, p2Name);
+  });
+
+  nextRoundButton.addEventListener("click", () => {
+    const nextRound = GameController.nextRound();
+
+    turnDisplay.textContent = `TURN: ${nextRound.activePlayer}`;
+    turnDisplay.classList.remove("end-game");
+
+    renderBoard();
+  });
+
+  restartButton.addEventListener("click", () => {
+    GameController.restart();
+
+    player1.disabled = false;
+    player2.disabled = false;
+    startButton.disabled = false;
+    setupForm.classList.remove("start-game");
+
+    player1.value = "";
+    player2.value = "";
+    turnDisplay.textContent = "TURN:";
+
+    renderBoard();
   });
 
   return { renderBoard };

@@ -81,14 +81,14 @@ body {
   transform: translateY(2px);
 }
 
-.status-restart-wrapper {
+.status-button-wrapper {
   width: 590px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
 }
 
-.status-restart-wrapper .status-display {
+.status-button-wrapper .status-display {
   height: 40px;
   font-size: 1rem;
   font-weight: 600;
@@ -102,11 +102,16 @@ body {
   box-shadow: 0 8px #102129;
 }
 
-.status-restart-wrapper .status-display.end-game {
+.status-button-wrapper .status-display.end-game {
   color: #f2b237;
 }
 
-.status-restart-wrapper .restart-button {
+.status-button-wrapper .restart-button {
+  margin-left: 10px;
+}
+
+.status-button-wrapper .restart-button,
+.status-button-wrapper .next-round-button {
   border: none;
   border-radius: 15px;
   padding: 10px;
@@ -120,7 +125,8 @@ body {
   transition: all 0.15s;
 }
 
-.status-restart-wrapper .restart-button:hover {
+.status-button-wrapper .restart-button:hover,
+.status-button-wrapper .next-round-button:hover {
   opacity: 0.7;
 }
 
