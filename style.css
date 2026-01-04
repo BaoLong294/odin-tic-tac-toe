@@ -10,6 +10,73 @@ body {
   background-color: #192a32;
 }
 
+.set-up-form {
+  display: flex;
+  justify-content: space-between;
+  width: 380px;
+  margin: 40px auto;
+}
+
+.set-up-form .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.set-up-form input {
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: #283e48;
+}
+
+.set-up-form input::placeholder {
+  color: #283e48;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.set-up-form input[id="p1-name"] {
+  background-color: #31c4be;
+  box-shadow: 0 5px #138a89;
+}
+
+.set-up-form input[id="p2-name"] {
+  background-color: #f2b237;
+  box-shadow: 0 5px #cc8b15;
+}
+
+.set-up-form input:focus {
+  outline: none;
+  background-color: #a8bec9;
+  box-shadow: 0 5px #6c8995;
+}
+
+.set-up-form .start-game-button {
+  border: none;
+  border-radius: 15px;
+  padding: 20px 25px;
+  background-color: #a8bec9;
+  box-shadow: 0 5px #6c8995;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: #283e48;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.set-up-form .start-game-button:hover {
+  opacity: 0.7;
+}
+
+.set-up-form .start-game-button:active {
+  transform: translateY(2px);
+}
+
 .game-board {
   display: grid;
   width: 600px;
