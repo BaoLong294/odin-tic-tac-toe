@@ -69,18 +69,17 @@ const GameController = (function () {
   };
 
   const playRound = function (index) {
-    if (!gameActive) {
-      return;
-    }
+    if (!gameActive) return;
 
     if (Gameboard.placeMarker(index, activePlayer.marker)) {
       if (checkResult() === "win") {
-        return `${activePlayer.name} IS THE WINNER!`;
+        return { status: "win", winner: activePlayer.name };
       } else if (checkResult() === "tie") {
-        return "TIE GAME!";
+        return { status: "tie" };
       }
 
       activePlayer = activePlayer === player1 ? player2 : player1;
+      return { status: checkResult(), activePlayer: activePlayer.name };
     }
 
     return Gameboard.getBoard();
@@ -94,6 +93,8 @@ const displayController = (function () {
   const player1 = setupForm.querySelector("#p1-name");
   const player2 = setupForm.querySelector("#p2-name");
   const startButton = setupForm.querySelector(".start-game-button");
+  const turnDisplay = document.querySelector(".status-display");
+  const restartButton = document.querySelector(".restart-button");
   const board = document.querySelector(".game-board");
 
   const renderBoard = function () {
@@ -115,8 +116,19 @@ const displayController = (function () {
 
   board.addEventListener("click", (e) => {
     const index = e.target.dataset.index;
-    GameController.playRound(index);
+    const moveResult = GameController.playRound(index);
+
     renderBoard();
+
+    if (moveResult && moveResult.status === "continue") {
+      turnDisplay.textContent = `TURN: ${moveResult.activePlayer}`;
+    } else if (moveResult && moveResult.status === "win") {
+      turnDisplay.textContent = `${moveResult.winner} WIN GAME!`;
+      turnDisplay.classList.add("end-game");
+    } else if (moveResult && moveResult.status === "tie") {
+      turnDisplay.textContent = "TIE GAME!";
+      turnDisplay.classList.add("end-game");
+    }
   });
 
   setupForm.addEventListener("submit", (e) => {
@@ -129,6 +141,8 @@ const displayController = (function () {
 
     const p1Name = player1.value.trim().toUpperCase() || "PLAYER 1";
     const p2Name = player2.value.trim().toUpperCase() || "PLAYER 2";
+
+    turnDisplay.textContent = `TURN: ${p1Name}`;
 
     GameController.startGame(p1Name, p2Name);
   });
