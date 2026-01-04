@@ -96,10 +96,13 @@ const displayController = (function () {
     });
   };
 
+  board.addEventListener("click", (e) => {
+    const index = e.target.dataset.index;
+    GameController.playRound(index);
+    renderBoard();
+  });
+
   return { renderBoard };
 })();
 
-// TEST
-GameController.playRound(1);
-GameController.playRound(4);
 displayController.renderBoard();
