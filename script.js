@@ -73,6 +73,7 @@ const GameController = (function () {
 
     if (Gameboard.placeMarker(index, activePlayer.marker)) {
       if (checkResult() === "win") {
+        gameActive = false;
         return { status: "win", winner: activePlayer.name };
       } else if (checkResult() === "tie") {
         return { status: "tie" };
