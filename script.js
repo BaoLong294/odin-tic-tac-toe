@@ -75,3 +75,31 @@ const GameController = (function () {
 
   return { playRound };
 })();
+
+const displayController = (function () {
+  const board = document.querySelector(".game-board");
+
+  const renderBoard = function () {
+    board.innerHTML = "";
+
+    Gameboard.getBoard().forEach((value, index) => {
+      const cell = document.createElement("div");
+      cell.classList.add("game-cell");
+
+      cell.dataset.index = index;
+
+      cell.textContent = value;
+      if (value === "X") cell.classList.add("X-marker");
+      if (value === "O") cell.classList.add("O-marker");
+
+      board.appendChild(cell);
+    });
+  };
+
+  return { renderBoard };
+})();
+
+// TEST
+GameController.playRound(1);
+GameController.playRound(4);
+displayController.renderBoard();

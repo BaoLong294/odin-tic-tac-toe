@@ -1,0 +1,40 @@
+* {
+  font-family: "Fredoka", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #192a32;
+}
+
+.game-board {
+  display: grid;
+  width: 600px;
+  margin: 50px auto;
+  grid-template-columns: repeat(3, 200px);
+  grid-auto-rows: 200px;
+  gap: 25px;
+}
+
+.game-board .game-cell {
+  font-size: 6rem;
+  font-weight: 700;
+  background-color: #1f3540;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px #102129;
+  cursor: pointer;
+}
+
+.game-board .X-marker {
+  color: #31c4be;
+}
+
+.game-board .O-marker {
+  color: #f2b237;
+}
